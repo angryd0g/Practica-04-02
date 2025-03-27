@@ -1,0 +1,114 @@
+# kv/main.kv
+<MainScreen>:
+    name: 'main'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: [0.05, 0.05, 0.1, 1]  # Темно-синий фон
+        spacing: 0
+        padding: 0
+
+        MDTopAppBar:
+            title: 'СУАИ-У - Ростелеком'
+            elevation: 4
+            md_bg_color: [0.15, 0.1, 0.25, 1]
+            specific_text_color: [1, 1, 1, 1]
+            left_action_items: []
+            right_action_items:
+                [
+                ['import', lambda x: root.show_import_dialog(), 'Импорт JSON'],
+                ['export', lambda x: root.show_export_dialog(), 'Экспорт XML'],
+                ['note', lambda x: root.show_notes_dialog(), 'Заметки'],
+                ['logout', lambda x: root.logout(), 'Выход']
+                ]
+            size_hint_y: None
+            height: dp(56)
+
+        MDTabs:
+            id: tabs
+            on_tab_switch: root.on_tab_switch(self, self.tab_bar, self.carousel.current_slide)
+            background_color: [0.1, 0.1, 0.15, 1]
+            tab_bar_height: dp(48)
+            indicator_color: [1, 0.65, 0, 1]
+            size_hint_y: None
+            height: dp(48)
+
+            TabAbonents:
+                text: 'Абоненты'
+                icon: 'account-group'
+
+            TabTariffs:
+                text: 'Тарифы'
+                icon: 'tag'
+
+            TabConnections:
+                text: 'Подключения'
+                icon: 'connection'
+
+            TabPayments:
+                text: 'Платежи'
+                icon: 'cash'
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: [dp(10), dp(5), dp(10), dp(5)]
+            spacing: dp(8)
+            md_bg_color: [0.08, 0.08, 0.12, 1]
+
+            MDRaisedButton:
+                text: 'Добавить'
+                icon: 'plus'
+                md_bg_color: [1, 0.65, 0, 1]
+                text_color: [0, 0, 0, 1]
+                font_size: '14sp'
+                on_release: root.show_add_dialog(root.current_table)
+
+            MDRaisedButton:
+                text: 'Поиск'
+                icon: 'magnify'
+                md_bg_color: [0.5, 0.3, 0.8, 1]
+                text_color: [1, 1, 1, 1]
+                font_size: '14sp'
+                on_release: root.show_search_dialog()
+
+            MDRaisedButton:
+                text: 'Редактировать'
+                icon: 'pencil'
+                md_bg_color: [0.5, 0.3, 0.8, 1]
+                text_color: [1, 1, 1, 1]
+                font_size: '14sp'
+                on_release: root.show_edit_selected_dialog()
+
+            MDRaisedButton:
+                text: 'Удалить'
+                icon: 'delete'
+                md_bg_color: [0.8, 0.2, 0.2, 1]
+                text_color: [1, 1, 1, 1]
+                font_size: '14sp'
+                on_release: root.show_delete_dialog()
+
+            Widget:
+                size_hint_x: 1
+
+            MDLabel:
+                id: current_table_label
+                text: 'Текущая таблица: Абоненты'
+                theme_text_color: 'Custom'
+                text_color: [0.8, 0.8, 0.8, 1]
+                font_size: '14sp'
+                size_hint_x: None
+                width: dp(180)
+
+        MDCard:
+            size_hint: 1, 1
+            padding: [dp(10), dp(10)]
+            md_bg_color: [0.1, 0.1, 0.15, 1]
+            radius: [dp(10), dp(10), 0, 0]
+            elevation: 2
+
+            MDBoxLayout:
+                id: data_table_container
+                orientation: 'vertical'
+                padding: 0
+                spacing: 0

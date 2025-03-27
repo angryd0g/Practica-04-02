@@ -1,0 +1,114 @@
+<LoginScreen>:
+    name: 'login'
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: [0.05, 0.05, 0.1, 1]  # Темно-синий фон
+
+        RelativeLayout:
+            MDCard:
+                size_hint: None, None
+                size: dp(400), dp(500)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                elevation: 15
+                radius: [dp(25)]
+                md_bg_color: [0.12, 0.12, 0.18, 1]  # Темно-фиолетовый карточка
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(35)
+                    spacing: dp(20)
+
+                    # Логотип (стилизованный под Ростелеком)
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(80)
+                        pos_hint: {'center_x': 0.5}
+
+                        MDLabel:
+                            text: 'Ростелеком'
+                            font_size: '32sp'
+                            font_name: 'Roboto'
+                            bold: True
+                            color: [1, 0.65, 0, 1]  # Оранжевый
+                            halign: 'center'
+
+                    MDLabel:
+                        text: 'СУАИ-У'
+                        font_style: 'H4'
+                        halign: 'center'
+                        size_hint_y: None
+                        height: dp(50)
+                        theme_text_color: 'Custom'
+                        text_color: [1, 1, 1, 1]  # Белый
+
+                    MDLabel:
+                        text: 'Вход в систему учета абонентов'
+                        font_style: 'Subtitle1'
+                        halign: 'center'
+                        size_hint_y: None
+                        height: dp(30)
+                        theme_text_color: 'Custom'
+                        text_color: [0.7, 0.7, 0.7, 1]  # Светло-серый
+
+                    MDSeparator:
+                        height: dp(1)
+
+                    MDTextField:
+                        id: username
+                        hint_text: 'Логин'
+                        mode: 'rectangle'
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: dp(50)
+
+                    MDTextField:
+                        id: password
+                        hint_text: 'Пароль'
+                        password: True
+                        mode: 'rectangle'
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: dp(50)
+
+                    MDLabel:
+                        id: error_label
+                        text: 'Неверный логин или пароль'
+                        theme_text_color: 'Error'
+                        halign: 'center'
+                        size_hint_y: None
+                        height: dp(30)
+                        opacity: 0
+
+                    MDRaisedButton:
+                        text: 'ВОЙТИ'
+                        size_hint_x: 1
+                        size_hint_y: None
+                        height: dp(55)
+                        md_bg_color: [1, 0.65, 0, 1]  # Оранжевый
+                        text_color: [0, 0, 0, 1]  # Черный текст
+                        font_size: '18sp'
+                        on_release: root.try_login()
+
+                    MDSeparator:
+                        height: dp(1)
+
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(40)
+                        spacing: dp(10)
+                        padding: [0, dp(10), 0, 0]
+
+                        MDLabel:
+                            text: 'Тестовый доступ:'
+                            font_size: '12sp'
+                            theme_text_color: 'Custom'
+                            text_color: [0.6, 0.6, 0.6, 1]
+                            size_hint_x: 0.4
+
+                        MDLabel:
+                            text: 'admin / admin123'
+                            font_size: '12sp'
+                            theme_text_color: 'Custom'
+                            text_color: [1, 0.65, 0, 1]  # Оранжевый
+                            size_hint_x: 0.6
